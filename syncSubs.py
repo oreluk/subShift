@@ -20,15 +20,17 @@ def syncSubs(fileLocation, changeAmount):
 
     def changeTime(t, change):
         chgTime = []
-        k = 1
         for time in t:
             ms = time.split(',')[1]
             hms = time.split(',')[0].split(':')
-            calc = (change + int(ms)) / 1000.0
+            calc = (abs(change) + int(ms)) / 1000.0
+            if change <= 0:
+                calc = -1 * calc  
             calc = str(calc).split('.')
             if len(calc[1]) == 2:
                 calc[1] = calc[1] + '0'
             ms = calc[1]
+            
             i = len(hms)
             while 0 is not int(calc[0]):
                 calc = (int(calc[0]) + int(hms[i - 1])) / 60.0
@@ -53,11 +55,18 @@ def syncSubs(fileLocation, changeAmount):
     fileLocation = fileLocation.split('.')
     fnew = open(fileLocation[0] + '-subsTemp', 'wt')
     forg = open(fileLocation[0] + '-original.' + fileLocation[1], 'wt')
-
+    n = 1
     for line in fin:
         forg.write(line)
         if '-->' in line:
             oldTime = line.split()
+            if n == 1:
+                n = 0
+                ms = oldTime[0].split(',')[1]
+                hms = oldTime[0].split(',')[0].split(':')
+                total = 3600 * int(hms[0]) + 60 * int(hms[1]) + \
+                    int(hms[2]) + int(ms) / 1000.0
+                assert total > abs(changeAmount) / 1000.0, "Change to time stamps exceeds Initial TimeStamp."
             newTime = changeTime([oldTime[0], oldTime[2]], changeAmount)
             line = line.replace(oldTime[0], newTime[0])
             line = line.replace(oldTime[2], newTime[1])

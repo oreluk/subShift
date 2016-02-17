@@ -11,9 +11,9 @@ Script will save an adjusted subtitle file at **fileLocation** and back up the o
 
 ## Motivation
 
-Every week I found myself having to adjust the subtitles of the same shows by the same amount over and over again. If watched only part of a episode or went back to a past show, I would again be adjusting the subtitles at the start of the video. This became pretty annoying especially if the subs were needing to be delayed -18000 ms. 
+Every week I found myself having to adjust the subtitles of the same shows by the same amount over and over again. If I watched only part of a episode or rewatched a past show, I would be adjusting the subtitles at the start of the video or trying to remember what delay was required to sync a past show and its subtitles. This became pretty annoying especially if the subs were needing to be delayed -18000 ms. 
 
-This script makes it simple for me to fix the subtitles once and done. If I playback a video now or in a month, I do not have to worry about remembering how out of sync a particular show is (Was it -5500 or -4600?). Shifting the subtitles by a fixed amount allows me to correct the files before I store them. No longer you have to deal with subtitle synchronization at startup. 
+This script makes it simple for me to fix the subtitles once and it's done. Playing back a video now or in a month does not require having to worry about remembering how out of sync a particular show is (Was it -5500 or -4600?). Shifting the subtitles by a fixed amount allows me to correct the files before I store them. No longer you have to deal with subtitle synchronization at startup. 
 
 ## License
 

@@ -23,14 +23,25 @@ def syncSubs(fileLocation, changeAmount):
         for time in t:
             ms = time.split(',')[1]
             hms = time.split(',')[0].split(':')
-            calc = (abs(change) + int(ms)) / 1000.0
+            
             if change <= 0:
-                calc = -1 * calc  
+                if  int(ms) - int(str(change)[-3:]) < 0:
+                    #negative result
+                    calc = abs(int(ms) - int(str(change)[-3:]))
+                    calc = str(int(change/1000.0) + 1) + '.' + str(calc)
+                elif int(ms) - int(str(change)[-3:]) == 0:
+                    calc = str(int(change/1000.0)) + '.' + '000'
+                else:
+                    calc = int(ms) - int(str(change)[-3:])
+                    calc = str(int(change/1000.0)) + '.' + str(calc)
+            else:
+                 calc = (change + int(ms)) / 1000.0
+            
             calc = str(calc).split('.')
             if len(calc[1]) == 2:
                 calc[1] = calc[1] + '0'
             ms = calc[1]
-            
+
             i = len(hms)
             while 0 is not int(calc[0]):
                 calc = (int(calc[0]) + int(hms[i - 1])) / 60.0

@@ -11,8 +11,16 @@ def syncSubs(fileLocation, changeAmount):
     # New file will be saved as '~/Videos/MySubtitleFileName.srt'
     # Original file will be saved as '~/Videos/MySubtitleFileName-original.srt'
 
-    def convertTimes(t, change):
+    def rollBack(time, iVal):
+        time[iVal - 1] = str(60 + int(time[iVal - 1]))
+        time[iVal - 2] = str(int(time[iVal - 2]) - 1)
+        if time[iVal - 2] < 0:
+            time = rollBack(time, iVal - 1)
+        return(time)
+
+    def changeTime(t, change):
         chgTime = []
+        k = 1
         for time in t:
             ms = time.split(',')[1]
             hms = time.split(',')[0].split(':')
@@ -22,15 +30,17 @@ def syncSubs(fileLocation, changeAmount):
                 calc[1] = calc[1] + '0'
             ms = calc[1]
             i = len(hms)
-            while '0' is not calc[0]:
+            while 0 is not int(calc[0]):
                 calc = (int(calc[0]) + int(hms[i - 1])) / 60.0
-                if calc <= 1.0:
+                if calc < 0:
                     hms[i - 1] = str(calc * 60).split('.')[0]
-                    calc = str(calc)
+                    hms = rollBack(hms, i)
+                elif calc <= 1.0:
+                    hms[i - 1] = str(calc * 60).split('.')[0]
                 else:
-                    calc = str(calc).split('.')
                     temp = round(float('0.' + calc[1]) * 60)
                     hms[i - 1] = str(int(temp))
+                calc = str(calc).split('.')
                 if len(hms[i - 1]) == 1:
                     hms[i - 1] = str(0) + hms[i - 1]
                 i = i - 1
@@ -48,7 +58,7 @@ def syncSubs(fileLocation, changeAmount):
         forg.write(line)
         if '-->' in line:
             oldTime = line.split()
-            newTime = convertTimes([oldTime[0], oldTime[2]], changeAmount)
+            newTime = changeTime([oldTime[0], oldTime[2]], changeAmount)
             line = line.replace(oldTime[0], newTime[0])
             line = line.replace(oldTime[2], newTime[1])
             fnew.write(line)
@@ -60,3 +70,5 @@ def syncSubs(fileLocation, changeAmount):
     forg.close()
     remove('.'.join(fileLocation))
     rename(fileLocation[0] + '-subsTemp', '.'.join(fileLocation))
+    print('Subtitle has been converted. \nOriginal file has been saved as ' +
+          fileLocation[0] + '-original.' + fileLocation[1])

@@ -1,9 +1,9 @@
-## Sync Subs
+## Subtitle Shift (subShift)
 
-subSync is a python script used to take a subtitle file and adjust all time stamps by a fixed amount.
+subShift is a script which is used to modify any subtitle file by shifting/adjusting time stamps by a given amount.
 
 ## Code Example
-Usage: **subSync(fileLocation, changeAmount)**
+Usage: **subShift(fileLocation, changeAmount)**
 
 Input: **fileLocation** is a string specifying the location of the subtitle.  **changeAmount** is a integer value specifying in milliseconds the amount to advance or delay a subtitle file.
 
@@ -11,9 +11,9 @@ Script will save an adjusted subtitle file at **fileLocation** and back up the o
 
 ## Motivation
 
-Every week I found myself having to adjust the subtitles of the same shows by the same amount over and over again. If I watched only part of a episode or rewatched a past show, I would be adjusting the subtitles at the start of the video or trying to remember what delay was required to sync a past show and its subtitles. This became pretty annoying especially if the subs were needing to be delayed -18000 ms. 
+Every week I found myself having to adjust the subtitles of the same shows by the same amount over and over again. If I watched only part of a episode or rewatched a past show, anytime I came back to play a video, I would be adjusting the subtitles at the start. This repetative task required me to remember what delay were required to sync a show and its subtitles. This was a monotonous task especially when the subtitles needed to be delayed -18000 ms. 
 
-This script makes it simple for me to fix the subtitles once and it's done. Playing back a video now or in a month does not require having to worry about remembering how out of sync a particular show is (Was it -5500 or -4600?). Shifting the subtitles by a fixed amount allows me to correct the files before I store them. No longer you have to deal with subtitle synchronization at startup. 
+Subtitle Shift makes it simple to quickly fix the subtitles once and you are done. Playing back a video now or in a month does not require the tiresome task of remembering how out of sync a particular show is (Was it -5500 ms or -4600 ms?). Shifting the subtitles by a fixed amount allows you to correct the files before storing them away. You will no longer have to deal with syncing your subtitles during playback again. 
 
 ## License
 

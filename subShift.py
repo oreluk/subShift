@@ -45,8 +45,15 @@ def subShift(fileLocation, changeAmount):
                 hms = oldTime[0].split(',')[0].split(':')
                 total = 3600 * int(hms[0]) + 60 * int(hms[1]) + \
                     int(hms[2]) + int(ms) / 1000.0
-                assert total > abs(
-                    changeAmount) / 1000.0, "Change value exceeds initial time stamp."
+                # If change exceeds initial stamp, clean up files before assert
+                if changeAmount < 0 and abs(changeAmount) > total:
+                        fin.close()
+                        fnew.close()
+                        forg.close()
+                        remove(fileLocation[0] + '-subsTemp')
+                        remove(fileLocation[0] + '-original.' + fileLocation[1])
+                    assert total > abs(
+                        changeAmount) / 1000.0, "Change value exceeds initial time stamp."
             newTime = changeTime([oldTime[0], oldTime[2]], changeAmount)
             line = line.replace(oldTime[0], newTime[0])
             line = line.replace(oldTime[2], newTime[1])

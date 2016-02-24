@@ -1,6 +1,6 @@
 ## Subtitle Shift (subShift)
 
-subShift is a script used to modify any subtitle file by shifting/adjusting time stamps by a given amount.
+subShift is a python script used to modify any subtitle file by shifting/adjusting time stamps by a given amount.
 
 ## Example
 Usage: **subShift(fileLocation, changeAmount)**

@@ -8,6 +8,7 @@ Usage: **subShift(fileLocation, changeAmount)**
 Input: **fileLocation** is a string specifying the location of the subtitle.  **changeAmount** is a integer value specifying in milliseconds the amount to advance or delay a subtitle file.
 
 Script will save an adjusted subtitle file at **fileLocation** and back up the original subtitle  at **fileLocation-original**. 
+Current version does not allow for subtitles to exceed initial timestamp. Need to do further research to see how players like VLC handles negative time stamps.
 
 ## Motivation
 

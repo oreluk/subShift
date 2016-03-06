@@ -52,6 +52,7 @@ def subShift(fileLocation, changeAmount):
                     forg.close()
                     remove(fileLocation[0] + '-subsTemp')
                     remove(fileLocation[0] + '-original.' + fileLocation[1])
+                    print('\nThe initial time stamp is: ' + oldTime[0] + '\n')
                     assert total > abs(
                         changeAmount) / 1000.0, "Change value exceeds initial time stamp."
             newTime = changeTime([oldTime[0], oldTime[2]], changeAmount)

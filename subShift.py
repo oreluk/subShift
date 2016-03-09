@@ -22,6 +22,8 @@ def subShift(fileLocation, changeAmount):
             dt = datetime.datetime.combine(
                 datetime.date.today(), d) + datetime.timedelta(milliseconds=change)
             new = str(dt.time())
+            if dt.microsecond == 0:
+                new = new + ',000000'
             new = new[0:-3]
             new = new.replace('.', ',')
             chgTime.append(new)

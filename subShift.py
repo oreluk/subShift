@@ -23,7 +23,7 @@ def subShift(fileLocation, changeAmount):
                 datetime.date.today(), d) + datetime.timedelta(milliseconds=change)
             new = str(dt.time())
             if dt.microsecond == 0:
-                new = new + ',000000'
+                new += ',000000'
             new = new[0:-3]
             new = new.replace('.', ',')
             chgTime.append(new)
@@ -58,8 +58,7 @@ def subShift(fileLocation, changeAmount):
                     assert total > abs(
                         changeAmount) / 1000.0, "Change value exceeds initial time stamp."
             newTime = changeTime([oldTime[0], oldTime[2]], changeAmount)
-            line = line.replace(oldTime[0], newTime[0])
-            line = line.replace(oldTime[2], newTime[1])
+            line = newTime[0] + ' --> ' + newTime[1] + '\n'
             fnew.write(line)
         else:
             fnew.write(line)
